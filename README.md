@@ -1,4 +1,4 @@
-***<h2 style="text-align: center;">[Introducing Soroban][def]</h2>***
+# [Introducing Soroban][def]
 
 
 
