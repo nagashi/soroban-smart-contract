@@ -46,6 +46,24 @@ impl IncrementorContract {
             env.storage().instance().bump(50,100);
         }
         count
+    }
+
+    /// Return the reseted value of the internal counter.
+    pub fn reset_value(env: Env) -> u32 {
+        let mut count: u32 = env.storage().temporary().get(&COUNTER).unwrap_or(0);
+
+        if count > 0 {
+            // reset the value of the key.
+            count = 0;
+        }        
+
+        log!(&env, "reset count: {}", count);
+
+        env.storage().temporary().set(&COUNTER, &count);
+
+        env.storage().temporary().bump(&COUNTER,50,100);
+
+        count
     }    
 }
 
