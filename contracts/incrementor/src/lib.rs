@@ -22,6 +22,15 @@ impl IncrementorContract {
 
         count
     }
+
+    /// Return the current value of the internal key.
+    pub fn get_current_value(env: Env) -> u32 {
+        let count: u32 = env.storage().instance().get(&COUNTER).unwrap_or(0);
+
+        log!(&env, "current count: {}", count);
+
+        count
+    }    
 }
 
 #[cfg(test)]
