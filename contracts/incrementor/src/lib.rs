@@ -30,6 +30,22 @@ impl IncrementorContract {
         log!(&env, "current count: {}", count);
 
         count
+    }
+
+    /// Return the decremented value of the internal key.
+    pub fn get_decrement_value(env: Env) -> u32 {
+        let mut count: u32 = env.storage().instance().get(&COUNTER).unwrap_or(0);
+
+        if count > 0 {
+            count -= 1;
+        
+            log!(&env, "decrement count: {}", count);
+
+            env.storage().instance().set(&COUNTER, &count);
+
+            env.storage().instance().bump(50,100);
+        }
+        count
     }    
 }
 
